@@ -30,7 +30,7 @@ router.post('/prod',(req, res)=>{
     //const like = req.body.like;
     console.log(limit, offset, condi);
     mysqlConnection.query(`
-        SELECT productos.idproductos, productos.descripcion,productos.peso, productos.unidadesCaja, unidadmedida.unidadMedida, categoria_productos.categoria, marca_prod.marca, genero_producto.genero, proveedor.proveedor, prod_presentacion.presentacioncol, productos.activo, productos.activo
+        SELECT productos.idproductos, productos.descripcion,productos.peso, productos.unidadesCaja, unidadmedida.unidadMedida, categoria_productos.categoria, marca_prod.marca, genero_producto.genero, proveedor.proveedor, prod_presentacion.presentacioncol, productos.image, productos.activo
         FROM productos 
         INNER JOIN categoria_productos ON productos.idcat=categoria_productos.idcat 
         INNER JOIN genero_producto ON productos.idgenero=genero_producto.idgenero 
