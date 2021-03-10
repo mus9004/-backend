@@ -155,10 +155,10 @@ router.post('/pedido', (req, res) =>
     
     //console.log( pedidos[0].idproductos)
     pedidos.forEach(element => { /*console.log(element.user);*/
-        mysqlConnection.query('INSERT INTO pedidos (codigoUsuario, cantidad, categoria, descripcion, idproductos, peso, unidadMedida, unidadesCaja, proveedor, fecha) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)',
+        mysqlConnection.query('INSERT INTO pedidos (codigoUsuario, cantidad, categoria, descripcion, idproductos, peso, unidadMedida, unidadesCaja, proveedor, fecha, comentario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, ?)',
             [element.user, element.cantidad, element.categoria, element.descripcion,
                  element.idproductos, element.peso, element.unidadMedida, 
-                 element.unidadesCaja, element.idproveedor], (err, rows, fields)=>{
+                 element.unidadesCaja, element.idproveedor, element.comentario], (err, rows, fields)=>{
 
             if (!err) {
                 res.json(rows[0]);
