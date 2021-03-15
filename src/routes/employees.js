@@ -253,7 +253,7 @@ router.post('/user/loginUser', (req, res) =>{
                     //res.json(rows);
                     // console.log(resultado, "si conecto")    
                 }else{
-                    res.send({"resul": 000,"error":"Usuario no activo"  });
+                    res.send({"resul": 400.0,"error":"Usuario no activo"  });
                 }
             } else{
                 res.send({"resul": 401.2,"error":"Error de contraseña"  });
