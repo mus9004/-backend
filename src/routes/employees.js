@@ -157,8 +157,8 @@ router.post('/pedido', (req, res) =>
     pedidos.forEach(element => { /*console.log(element.user);*/
         mysqlConnection.query('INSERT INTO pedidos (codigoUsuario, cantidad, categoria, descripcion, idproductos, peso, unidadMedida, unidadesCaja, proveedor, fecha, comentario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, ?)',
             [element.user, element.cantidad, element.categoria, element.descripcion,
-                 element.idproductos, element.peso, element.unidadMedida, 
-                 element.unidadesCaja, element.idproveedor, element.comentario], (err, rows, fields)=>{
+                element.idproductos, element.peso, element.unidadMedida, 
+                element.unidadesCaja, element.idproveedor, element.comentario], (err, rows, fields)=>{
 
             if (!err) {
                 res.json(rows[0]);
@@ -247,10 +247,14 @@ router.post('/user/loginUser', (req, res) =>{
         if ((!err) && (rows!="")) {
             const resultado= bcrypt.compareSync(contrasena, rows[0].contrasena)
             if (resultado) {
-                const token = jwt.sign({ "user":{"id":rows[0].id,"codigoUsuario":rows[0].codigoUsuario, "nombreNegocio":rows[0].nombreNegocio, "email":rows[0].email, "rtn":rows[0].rtn}},secret,{expiresIn: 60 * 60 * 24})
-                res.send({"resul": resultado,"token":token });
-                //res.json(rows);
-               // console.log(resultado, "si conecto")
+                if (rows[0].activo==1) {
+                    const token = jwt.sign({ "user":{"id":rows[0].id,"codigoUsuario":rows[0].codigoUsuario, "nombreNegocio":rows[0].nombreNegocio, "email":rows[0].email, "rtn":rows[0].rtn}},secret,{expiresIn: 60 * 60 * 24})
+                    res.send({"resul": resultado,"token":token });
+                    //res.json(rows);
+                    // console.log(resultado, "si conecto")    
+                }else{
+                    res.send({"resul": 000,"error":"Usuario no activo"  });
+                }
             } else{
                 res.send({"resul": 401.2,"error":"Error de contraseña"  });
             }
