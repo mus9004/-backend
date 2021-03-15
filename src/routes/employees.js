@@ -38,7 +38,7 @@ router.post('/prod',(req, res)=>{
         INNER JOIN prod_presentacion ON productos.idpresentacion = prod_presentacion.idpresentacion
         INNER JOIN proveedor ON productos.idproveedor=proveedor.idproveedor
         INNER JOIN unidadmedida ON productos.idMedida=unidadmedida.idMedida 
-        WHERE ${condi} `,(err, rows, fields)=>{
+        WHERE ${condi} ORDER BY RAND()`,(err, rows, fields)=>{
             if (!err) {
                 res.json(rows);
             } else {
