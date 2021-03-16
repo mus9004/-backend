@@ -224,8 +224,7 @@ router.post('/user/createUser', (req, res) =>{
     const telefono  = req.body.telefono;
     
     console.log(nombreContacto,nombreNegocio,contrasena,email,rtn,telefono);
-   
-    mysqlConnection.query('INSERT INTO usuario (codigoUsuario, nombreContacto, nombreNegocio, contrasena, email, rtn, 	telefono) VALUES (0, ?, ?, ?, ?, ?, ?)', 
+    mysqlConnection.query('INSERT INTO usuario (codigoUsuario, nombreContacto, nombreNegocio, contrasena, email, rtn, telefono, activo) VALUES (0, ?, ?, ?, ?, ?, ?, 0)', 
         [nombreContacto, nombreNegocio, contrasena,email,rtn,telefono ], (err, rows, fields)=>{
         if (!err) {
             res.json(rows);
