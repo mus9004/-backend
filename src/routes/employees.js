@@ -276,10 +276,7 @@ router.post('/user/loginUserAd', (req, res) =>{
         if ((!err) && (rows!="")) {
             const resultado= bcrypt.compareSync(contrasena, rows[0].contrasena)
             if (resultado) {
-                    const token = jwt.sign({ "user":{"id":rows[0].id,"codigoUsuario":rows[0].codigoUsuario, "nombreNegocio":rows[0].nombreNegocio, "email":rows[0].email, "rtn":rows[0].rtn}},secret,{expiresIn: 60 * 60 * 24})
-                    res.send({"resul": resultado,"token":token });
-                    //res.json(rows);
-                    // console.log(resultado, "si conecto")    
+                    res.send({"resul": resultado });
             } else{
                 res.send({"resul": 401.2,"error":"Error de contraseña"  });
             }
