@@ -265,6 +265,31 @@ router.post('/user/loginUser', (req, res) =>{
 
 /*------------*/
 
+router.post('/user/loginUserAd', (req, res) =>{
+    
+    const contrasena  = req.body.contrasena;
+    const email  = req.body.email;
+    console.log(contrasena,email);
+    mysqlConnection.query('SELECT * FROM `adcontra` WHERE usuario.email=?', [email], (err, rows, fields)=>{
+        
+        console.log((rows==""),rows);
+        if ((!err) && (rows!="")) {
+            const resultado= bcrypt.compareSync(contrasena, rows[0].contrasena)
+            if (resultado) {
+                    const token = jwt.sign({ "user":{"id":rows[0].id,"codigoUsuario":rows[0].codigoUsuario, "nombreNegocio":rows[0].nombreNegocio, "email":rows[0].email, "rtn":rows[0].rtn}},secret,{expiresIn: 60 * 60 * 24})
+                    res.send({"resul": resultado,"token":token });
+                    //res.json(rows);
+                    // console.log(resultado, "si conecto")    
+            } else{
+                res.send({"resul": 401.2,"error":"Error de contraseña"  });
+            }
+        } else {
+            res.send({"resul": 401.1, "error":"Error de correo" });
+        }
+    });
+});
+
+/*------------*/
 router.post('/mar', (req, res) =>{
     const contrasena  = req.body.contrasena;
     const email  = req.body.email;
