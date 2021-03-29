@@ -274,7 +274,8 @@ router.post('/user/loginUserAd', (req, res) =>{
         
         console.log((rows==""),rows[0].password+"xvxxxxxxxxxxx");
         if ((!err) ) {
-            const resultado= bcrypt.compareSync(contrasena, rows[0].contrasena)
+            const resultado= bcrypt.compareSync(contrasena, rows[0].password)
+            console.log(resultado+"ddddddddddddddddddddddddddddddddd");
             if (resultado) {
                     res.send({"resul": resultado });
                     console.log(resultado);
