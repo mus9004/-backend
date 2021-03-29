@@ -273,10 +273,11 @@ router.post('/user/loginUserAd', (req, res) =>{
     mysqlConnection.query('SELECT * FROM `adcontra` WHERE  adcontra.email=?', [email], (err, rows, fields)=>{
         
         console.log((rows==""),rows[0].password+"xvxxxxxxxxxxx");
-        if ((!err) && (rows!="")) {
+        if ((!err) ) {
             const resultado= bcrypt.compareSync(contrasena, rows[0].contrasena)
             if (resultado) {
                     res.send({"resul": resultado });
+                    console.log(resultado);
             } else{
                 res.send({"resul": 401.2,"error":"Error de contraseña"  });
             }
