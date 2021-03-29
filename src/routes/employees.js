@@ -277,7 +277,7 @@ router.post('/user/loginUserAd', (req, res) =>{
             const resultado= bcrypt.compareSync(contrasena, rows[0].password)
             console.log(resultado+"ddddddddddddddddddddddddddddddddd");
             if (resultado) {
-                    res.send(JSON.parse('{"resul": "true" }'));
+                    res.send(JSON.parse('{"resul": "true","error":"0" }'));
                     console.log(resultado);
             } else{
                 res.send(JSON.parse('{"resul": 401.2,"error":"Error de contraseña"}'));
