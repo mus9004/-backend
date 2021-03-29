@@ -270,7 +270,7 @@ router.post('/user/loginUserAd', (req, res) =>{
     const contrasena  = req.body.contrasena;
     const email  = req.body.email;
     console.log(contrasena,email);
-    mysqlConnection.query('SELECT * FROM `adcontra` WHERE usuario.email=?', [email], (err, rows, fields)=>{
+    mysqlConnection.query('SELECT * FROM `adcontra` WHERE  adcontra.email=?', [email], (err, rows, fields)=>{
         
         console.log((rows==""),rows);
         if ((!err) && (rows!="")) {
